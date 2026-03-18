@@ -19,6 +19,24 @@ interface StudentRecord {
 
 export default function StudentPage() {
   const [student, setStudent] = useState<StudentRecord | null>(null);
+  const [demoLoading, setDemoLoading] = useState(false);
+
+  async function tryDemo() {
+    setDemoLoading(true);
+    try {
+      const res = await fetch("/api/students", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: "Emma W." }),
+      });
+      if (res.ok) {
+        const s = await res.json();
+        setStudent(s);
+      }
+    } finally {
+      setDemoLoading(false);
+    }
+  }
 
   if (!student) {
     return (
@@ -31,8 +49,8 @@ export default function StudentPage() {
           <div className="gate-form">
             <StudentJoinForm onJoin={(s) => setStudent(s)} />
           </div>
-          <button className="gate-demo-btn" type="button" onClick={() => setStudent({ id: 0, name: "Emma W.", created_at: new Date().toISOString() })}>
-            Try Demo
+          <button className="gate-demo-btn" type="button" onClick={tryDemo} disabled={demoLoading}>
+            {demoLoading ? "Loading..." : "Try Demo"}
           </button>
         </div>
       </div>
