@@ -460,10 +460,21 @@ input, textarea, select { font-family: var(--font); }
   font-size: 0.85rem;
   margin: -4px 0 0;
 }
-.gate-hint {
-  margin-top: 20px;
-  font-size: 0.8rem;
-  color: var(--text-muted);
+.gate-demo-btn {
+  margin-top: 16px;
+  background: none;
+  color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: var(--radius-sm);
+  border: 1.5px dashed var(--border);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.gate-demo-btn:hover {
+  border-color: var(--primary);
+  background: rgba(30, 58, 95, 0.04);
 }
 
 /* ========== DASHBOARD COMMON ========== */

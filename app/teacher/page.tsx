@@ -53,7 +53,9 @@ export default function TeacherPage() {
               Sign In
             </button>
           </form>
-          <p className="gate-hint">Demo code: <strong>maple2026</strong></p>
+          <button className="gate-demo-btn" type="button" onClick={() => setLoggedIn(true)}>
+            Try Demo
+          </button>
         </div>
       </div>
     );

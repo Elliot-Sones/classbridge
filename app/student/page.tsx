@@ -31,6 +31,9 @@ export default function StudentPage() {
           <div className="gate-form">
             <StudentJoinForm onJoin={(s) => setStudent(s)} />
           </div>
+          <button className="gate-demo-btn" type="button" onClick={() => setStudent({ id: 0, name: "Emma W.", created_at: new Date().toISOString() })}>
+            Try Demo
+          </button>
         </div>
       </div>
     );

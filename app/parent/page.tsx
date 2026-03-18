@@ -59,6 +59,9 @@ export default function ParentPage() {
               View Dashboard
             </button>
           </form>
+          <button className="gate-demo-btn" type="button" onClick={() => { setParentName("Sarah"); setChildName("Emma"); setLoggedIn(true); }}>
+            Try Demo
+          </button>
         </div>
       </div>
     );
