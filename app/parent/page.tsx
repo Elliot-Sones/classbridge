@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Card from "@/components/Card";
-import SummaryItem from "@/components/SummaryItem";
+import LiveSummaries from "@/components/LiveSummaries";
 import MessageThread from "@/components/MessageThread";
 import ActivityCard from "@/components/ActivityCard";
 import ProgressBar from "@/components/ProgressBar";
@@ -10,8 +10,6 @@ import ResourceLink from "@/components/ResourceLink";
 import PrivacyBadge from "@/components/PrivacyBadge";
 import BookCallModal from "@/components/BookCallModal";
 import {
-  parentSummaries,
-  parentMessages,
   activities,
   weeklyProgress,
   parentResources,
@@ -34,9 +32,7 @@ export default function ParentPage() {
           <div>
             {/* Today's Learning Summary */}
             <Card title="Today's Learning Summary" icon={"\u{1F4DA}"} style={{ marginBottom: 24 }}>
-              {parentSummaries.map((s) => (
-                <SummaryItem key={s.title} item={s} />
-              ))}
+              <LiveSummaries />
             </Card>
 
             {/* Messages */}
@@ -54,14 +50,15 @@ export default function ParentPage() {
                   Book Call
                 </button>
               }
-              headerRight={<PrivacyBadge label="Private \u2014 Only your family sees these" />}
+              headerRight={<PrivacyBadge label="Private — Only your family sees these" />}
               style={{ marginBottom: 24 }}
             >
               <MessageThread
-                initialMessages={parentMessages}
+                channel="parent"
                 placeholder="Reply to Mrs. Sones..."
                 toastMessage="Message sent to Mrs. Sones"
-                senderName="You"
+                senderName="You (Parent)"
+                isSent={true}
               />
             </Card>
 

@@ -1,16 +1,37 @@
 "use client";
 
 import { useState } from "react";
-import { Assignment } from "@/data/mock";
 
-export default function AssignmentItem({ assignment }: { assignment: Assignment }) {
-  const [checked, setChecked] = useState(assignment.completed ?? false);
+interface AssignmentProps {
+  id: number;
+  title: string;
+  due_text: string;
+  due_soon: boolean;
+  completed: boolean;
+  studentId: number | null;
+}
+
+export default function AssignmentItem({ id, title, due_text, due_soon, completed: initialCompleted, studentId }: AssignmentProps) {
+  const [checked, setChecked] = useState(initialCompleted);
+
+  async function toggle() {
+    const newState = !checked;
+    setChecked(newState);
+
+    if (studentId) {
+      await fetch("/api/assignments/complete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ assignmentId: id, studentId, completed: newState }),
+      });
+    }
+  }
 
   return (
     <div className="assignment-item">
       <div
         className={`assignment-check${checked ? " checked" : ""}`}
-        onClick={() => setChecked(!checked)}
+        onClick={toggle}
       >
         {checked && (
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
@@ -20,13 +41,13 @@ export default function AssignmentItem({ assignment }: { assignment: Assignment 
       </div>
       <div className="assignment-info">
         <h4 style={checked ? { textDecoration: "line-through", color: "var(--text-muted)" } : undefined}>
-          {assignment.title}
+          {title}
         </h4>
         <span
-          className={`due${!checked && assignment.dueSoon ? " soon" : ""}`}
+          className={`due${!checked && due_soon ? " soon" : ""}`}
           style={checked ? { color: "var(--accent)" } : undefined}
         >
-          {checked ? "Completed!" : assignment.due}
+          {checked ? "Completed!" : due_text}
         </span>
       </div>
     </div>
