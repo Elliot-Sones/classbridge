@@ -1,0 +1,53 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/parent", label: "Parent Dashboard" },
+  { href: "/student", label: "Student View" },
+  { href: "/teacher", label: "Teacher View" },
+];
+
+export default function Navbar() {
+  const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  return (
+    <nav className="topbar">
+      <div className="topbar-inner">
+        <Link href="/" className="logo" onClick={() => setMenuOpen(false)}>
+          <svg viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="6" fill="rgba(255,255,255,0.2)" />
+            <path d="M7 10h14M7 14h14M7 18h8" stroke="#fff" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="21" cy="18" r="3.5" fill="#2d8a4e" stroke="#fff" strokeWidth="1.5" />
+            <path d="M20 18l1 1 2-2" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          ClassBridge
+        </Link>
+        <button className="mobile-menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+        <ul className={`nav-tabs${menuOpen ? " open" : ""}`}>
+          {navItems.map((item) => (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                className={`nav-tab${pathname === item.href ? " active" : ""}`}
+                onClick={() => setMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
+  );
+}
