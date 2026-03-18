@@ -5,13 +5,12 @@ import Link from "next/link";
 import Card from "@/components/Card";
 import MessageThread from "@/components/MessageThread";
 import StatCard from "@/components/StatCard";
-import StudentRow from "@/components/StudentRow";
+import StudentList from "@/components/StudentList";
 import PrivacyBadge from "@/components/PrivacyBadge";
 import { useToast } from "@/components/Toast";
 import {
   stats,
   teacherMessages,
-  students,
   teacherResources,
 } from "@/data/mock";
 
@@ -117,12 +116,8 @@ export default function TeacherPage() {
 
         {/* Right Column */}
         <div>
-          {/* Student Activity */}
-          <Card title="Student Activity" icon={"\u{1F465}"} style={{ marginBottom: 24 }}>
-            {students.map((s) => (
-              <StudentRow key={s.initials} student={s} />
-            ))}
-          </Card>
+          {/* Live Student Roster */}
+          <StudentList />
 
           {/* Quick Actions */}
           <Card title="Quick Actions" icon={"\u26A1"}>
