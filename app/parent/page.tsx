@@ -16,13 +16,59 @@ import {
 } from "@/data/mock";
 
 export default function ParentPage() {
+  const [parentName, setParentName] = useState("");
+  const [childName, setChildName] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+
+  function handleLogin(e: React.FormEvent) {
+    e.preventDefault();
+    if (parentName.trim() && childName.trim()) {
+      setLoggedIn(true);
+    }
+  }
+
+  if (!loggedIn) {
+    return (
+      <div className="dashboard">
+        <div className="gate-screen">
+          <div className="gate-icon">{"👨‍👩‍👧"}</div>
+          <h1>Parent Portal</h1>
+          <p>Mrs. Sones&apos;s Grade 3 &middot; Maple Ridge Elementary</p>
+          <p className="gate-subtitle">Enter your info to view your child&apos;s classroom updates.</p>
+          <form onSubmit={handleLogin} className="gate-form">
+            <input
+              type="text"
+              className="message-input"
+              placeholder="Your name (e.g. Sarah)"
+              value={parentName}
+              onChange={(e) => setParentName(e.target.value)}
+              maxLength={100}
+              required
+            />
+            <input
+              type="text"
+              className="message-input"
+              placeholder="Your child's name (e.g. Emma)"
+              value={childName}
+              onChange={(e) => setChildName(e.target.value)}
+              maxLength={100}
+              required
+            />
+            <button className="btn btn-cta" type="submit" style={{ width: "100%" }}>
+              View Dashboard
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
       <div className="dashboard">
         <div className="dash-header">
-          <p className="dash-greeting">Welcome back, Emma&apos;s family</p>
+          <p className="dash-greeting">Welcome back, {childName}&apos;s family</p>
           <h1>Parent Dashboard</h1>
           <p>Mrs. Sones&apos;s Grade 3 Class &middot; Maple Ridge Elementary &middot; Tuesday, March 17</p>
         </div>
@@ -57,7 +103,7 @@ export default function ParentPage() {
                 channel="parent"
                 placeholder="Reply to Mrs. Sones..."
                 toastMessage="Message sent to Mrs. Sones"
-                senderName="You (Parent)"
+                senderName={`${parentName.trim()} (${childName.trim()}'s parent)`}
                 isSent={true}
               />
             </Card>

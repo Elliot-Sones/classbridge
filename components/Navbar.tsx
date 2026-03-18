@@ -4,16 +4,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/parent", label: "Parent Dashboard" },
-  { href: "/student", label: "Student View" },
-  { href: "/teacher", label: "Teacher View" },
-];
-
 export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const isDashboard = pathname === "/parent" || pathname === "/student" || pathname === "/teacher";
+
+  const roleLabel =
+    pathname === "/parent" ? "Parent Dashboard" :
+    pathname === "/student" ? "Student View" :
+    pathname === "/teacher" ? "Teacher Dashboard" :
+    null;
 
   return (
     <nav className="topbar">
@@ -27,6 +28,9 @@ export default function Navbar() {
           </svg>
           ClassBridge
         </Link>
+        {isDashboard && (
+          <span className="nav-role-label">{roleLabel}</span>
+        )}
         <button className="mobile-menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <line x1="3" y1="6" x2="21" y2="6" />
@@ -35,17 +39,31 @@ export default function Navbar() {
           </svg>
         </button>
         <ul className={`nav-tabs${menuOpen ? " open" : ""}`}>
-          {navItems.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                className={`nav-tab${pathname === item.href ? " active" : ""}`}
-                onClick={() => setMenuOpen(false)}
-              >
-                {item.label}
+          {!isDashboard ? (
+            <>
+              <li>
+                <Link href="/parent" className="nav-tab" onClick={() => setMenuOpen(false)}>
+                  For Parents
+                </Link>
+              </li>
+              <li>
+                <Link href="/student" className="nav-tab" onClick={() => setMenuOpen(false)}>
+                  For Students
+                </Link>
+              </li>
+              <li>
+                <Link href="/teacher" className="nav-tab" onClick={() => setMenuOpen(false)}>
+                  For Teachers
+                </Link>
+              </li>
+            </>
+          ) : (
+            <li>
+              <Link href="/" className="nav-tab" onClick={() => setMenuOpen(false)}>
+                Sign Out
               </Link>
             </li>
-          ))}
+          )}
         </ul>
       </div>
     </nav>

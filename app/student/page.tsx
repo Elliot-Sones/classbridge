@@ -23,10 +23,14 @@ export default function StudentPage() {
   if (!student) {
     return (
       <div className="dashboard">
-        <div className="dash-header" style={{ textAlign: "center", maxWidth: 480, margin: "0 auto", paddingTop: 60, paddingBottom: 40 }}>
+        <div className="gate-screen">
+          <div className="gate-icon">{"🎒"}</div>
           <h1>Join Your Classroom</h1>
-          <p style={{ marginBottom: 24 }}>Mrs. Sones&apos;s Grade 3 &middot; Maple Ridge Elementary</p>
-          <StudentJoinForm onJoin={(s) => setStudent(s)} />
+          <p>Mrs. Sones&apos;s Grade 3 &middot; Maple Ridge Elementary</p>
+          <p className="gate-subtitle">Enter your name to join the class and see today&apos;s activities.</p>
+          <div className="gate-form">
+            <StudentJoinForm onJoin={(s) => setStudent(s)} />
+          </div>
         </div>
       </div>
     );

@@ -76,6 +76,15 @@ input, textarea, select { font-family: var(--font); }
 .logo:hover { text-decoration: none; }
 .logo svg { width: 28px; height: 28px; }
 
+.nav-role-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.02em;
+  margin-left: auto;
+  margin-right: 16px;
+}
+
 .nav-tabs {
   display: flex;
   gap: 4px;
@@ -367,6 +376,94 @@ input, textarea, select { font-family: var(--font); }
   max-width: 480px;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Role Cards (CTA section) */
+.role-cards {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.role-card {
+  flex: 1;
+  min-width: 200px;
+  max-width: 240px;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  color: var(--text);
+}
+.role-card:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+.role-card-icon {
+  font-size: 2.2rem;
+  margin-bottom: 4px;
+}
+.role-card strong {
+  font-size: 1.05rem;
+  color: var(--primary);
+}
+.role-card span:last-child {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  line-height: 1.4;
+}
+
+/* ========== GATE SCREENS ========== */
+.gate-screen {
+  text-align: center;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 60px 0 40px;
+}
+.gate-screen h1 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+.gate-screen > p {
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+.gate-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+.gate-subtitle {
+  margin-top: 16px;
+  color: var(--text-muted) !important;
+  font-size: 0.9rem !important;
+}
+.gate-form {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.gate-error {
+  color: var(--cta);
+  font-size: 0.85rem;
+  margin: -4px 0 0;
+}
+.gate-hint {
+  margin-top: 20px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
 }
 
 /* ========== DASHBOARD COMMON ========== */

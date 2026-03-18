@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Card from "@/components/Card";
 import MessageThread from "@/components/MessageThread";
@@ -12,8 +13,51 @@ import AssignmentList from "@/components/AssignmentList";
 import { useToast } from "@/components/Toast";
 import { teacherResources } from "@/data/mock";
 
+const CLASS_CODE = "maple2026";
+
 export default function TeacherPage() {
+  const [codeInput, setCodeInput] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [error, setError] = useState("");
   const { showToast } = useToast();
+
+  function handleLogin(e: React.FormEvent) {
+    e.preventDefault();
+    if (codeInput.trim().toLowerCase() === CLASS_CODE) {
+      setLoggedIn(true);
+      setError("");
+    } else {
+      setError("Incorrect class code. Please try again.");
+    }
+  }
+
+  if (!loggedIn) {
+    return (
+      <div className="dashboard">
+        <div className="gate-screen">
+          <div className="gate-icon">{"👩‍🏫"}</div>
+          <h1>Teacher Login</h1>
+          <p>Maple Ridge Elementary</p>
+          <p className="gate-subtitle">Enter your class code to access the teacher dashboard.</p>
+          <form onSubmit={handleLogin} className="gate-form">
+            <input
+              type="text"
+              className="message-input"
+              placeholder="Class code"
+              value={codeInput}
+              onChange={(e) => { setCodeInput(e.target.value); setError(""); }}
+              required
+            />
+            {error && <p className="gate-error">{error}</p>}
+            <button className="btn btn-primary" type="submit" style={{ width: "100%" }}>
+              Sign In
+            </button>
+          </form>
+          <p className="gate-hint">Demo code: <strong>maple2026</strong></p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="dashboard">

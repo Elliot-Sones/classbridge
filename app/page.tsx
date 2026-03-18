@@ -11,7 +11,7 @@ export default function LandingPage() {
           <h1>Bridge the Gap Between Classroom and Home</h1>
           <p>ClassBridge gives parents real-time visibility into what their child is learning, private channels to communicate with teachers, and curated resources to extend learning at home.</p>
           <div className="hero-buttons">
-            <Link href="/parent" className="btn btn-cta">See Parent Dashboard</Link>
+            <Link href="/parent" className="btn btn-cta">I&apos;m a Parent</Link>
             <Link href="/teacher" className="btn btn-outline">I&apos;m a Teacher</Link>
           </div>
         </div>
@@ -89,11 +89,23 @@ export default function LandingPage() {
       {/* CTA */}
       <section className="cta-section">
         <h2>Ready to Connect Classroom and Home?</h2>
-        <p>Explore the demo dashboards to see ClassBridge in action.</p>
-        <div className="hero-buttons" style={{ justifyContent: "center" }}>
-          <Link href="/parent" className="btn btn-cta">Explore Parent View</Link>
-          <Link href="/student" className="btn btn-primary">Explore Student View</Link>
-          <Link href="/teacher" className="btn btn-accent">Explore Teacher View</Link>
+        <p>Choose your role to explore the demo.</p>
+        <div className="role-cards">
+          <Link href="/parent" className="role-card">
+            <span className="role-card-icon">{"👨‍👩‍👧"}</span>
+            <strong>I&apos;m a Parent</strong>
+            <span>See learning summaries, message the teacher, and track homework</span>
+          </Link>
+          <Link href="/student" className="role-card">
+            <span className="role-card-icon">{"🎒"}</span>
+            <strong>I&apos;m a Student</strong>
+            <span>View today&apos;s lessons, check your to-do list, and ask questions</span>
+          </Link>
+          <Link href="/teacher" className="role-card">
+            <span className="role-card-icon">{"👩‍🏫"}</span>
+            <strong>I&apos;m a Teacher</strong>
+            <span>Post summaries, manage assignments, and message families</span>
+          </Link>
         </div>
       </section>
     </>
