@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Card from "./Card";
-import StudentJoinForm from "./StudentJoinForm";
 
 interface StudentRecord {
   id: number;
@@ -44,15 +43,9 @@ export default function StudentList() {
     fetchStudents();
   }, [fetchStudents]);
 
-  function handleJoin(student: StudentRecord) {
-    setStudents((prev) => [student, ...prev]);
-  }
-
   return (
     <Card title="Class Roster" icon={"\u{1F465}"} style={{ marginBottom: 24 }}>
-      <StudentJoinForm onJoin={handleJoin} />
-
-      <div style={{ marginTop: 16 }}>
+      <div>
         {loading ? (
           <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", padding: "12px 0" }}>
             Loading students...
